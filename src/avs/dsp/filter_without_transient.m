@@ -24,8 +24,6 @@ function y = filter_without_transient(b, x, options)
 %   its group delay is fractional. Because of that, this function will
 %   compensate for this delay imperfectly, leaving residual phase
 %   distortion in the output signal.
-%
-%   See also: ESTIMATE_FIR_EVEN_ORDER
 
 arguments(Input)
     b {mustBeVector, mustBeReal}
