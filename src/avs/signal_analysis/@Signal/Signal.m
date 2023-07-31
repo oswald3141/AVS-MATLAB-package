@@ -73,6 +73,10 @@ classdef Signal
         r = filter_without_transient(this, b, options);
     end
 
+    methods(Access = public, Static)
+        r = sum(a);
+    end
+
     methods
         function val = get.n(this)
             val = length(this.samples);
