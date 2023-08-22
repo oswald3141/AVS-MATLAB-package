@@ -7,7 +7,7 @@ function mustBeIncreasing(V, allowEqual)
 
 arguments(Input)
     V
-    allowEqual = false;
+    allowEqual (1,1) logical = false;
 end
 
 if ~(isnumeric(V) || islogical(V))
@@ -27,13 +27,6 @@ if ~(isvector(V) && (length(V) > 1))
         "mustBeIncreasing:inputNotVector", ...
         "The input must be a vector."));
 end
-
-if ~(isscalar(allowEqual) && islogical(allowEqual))
-    throwAsCaller(MException( ...
-        "mustBeIncreasing:incorrectSecondInput", ...
-        "The second input must be a logical scalar."));
-end
-
 
 dA = diff(V);
 if(allowEqual)
