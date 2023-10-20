@@ -76,6 +76,7 @@ classdef Signal
 
     methods(Access = public, Static)
         r = sum(a);
+        r = abs(a);
     end
 
     methods
