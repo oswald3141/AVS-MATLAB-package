@@ -6,7 +6,7 @@ function prevent_sleep_mode(state)
 %   mode.
 %
 %   PREVENT_SLEEP_MODE("off") restores the MATLAB's thread execution state
-%   to the one used before the PREVENT_SLEEP_MODE("on") call was made.
+%   to the one allowing the sleep mode.
 %
 %   The function supports Windows machines only.
 %   The function makes a direct call to WinAPI, and therefore requires a
@@ -25,7 +25,11 @@ function prevent_sleep_mode(state)
     assert(ispc, "prevent_sleep_mode:UnsupportedPlatform", ...
         "The implementation for this platform is not available.");
 
-    persistent prevExecState;
+    % Thread's execution requirements for SetThreadExecutionState
+    % See http://msdn.microsoft.com/en-us/library/windows/desktop/aa373208(v=vs.85).aspx
+    ES_CONTINUOUS = 0x80000000;
+    ES_SYSTEM_REQUIRED = 0x00000001;
+    ES_AWAYMODE_REQUIRED = 0x00000040;
 
     if state == "on"
         % Load kernel32 library
@@ -49,19 +53,13 @@ function prevent_sleep_mode(state)
 
         % Call SetThreadExecutionState to prevent sleep mode
 
-        % Argument for SetThreadExecutionState
-        % See http://msdn.microsoft.com/en-us/library/windows/desktop/aa373208(v=vs.85).aspx
-        ES_CONTINUOUS = 0x80000000;
-        ES_SYSTEM_REQUIRED = 0x00000001;
-        ES_AWAYMODE_REQUIRED = 0x00000040;
-
         newExecState = bitor(bitor( ...
             ES_CONTINUOUS, ES_SYSTEM_REQUIRED), ES_AWAYMODE_REQUIRED);
 
-        prevExecState = calllib("kernel32", "SetThreadExecutionState", ...
+        ret = calllib("kernel32", "SetThreadExecutionState", ...
             newExecState);
 
-        assert(prevExecState ~= 0, ...
+        assert(ret ~= 0, ...
             "prevent_sleep_mode:WinApiCallFailure", ...
             "Error while trying to prevent system sleep.");
 
@@ -74,7 +72,7 @@ function prevent_sleep_mode(state)
 
         % Restore previous execution state
         ret = calllib("kernel32", "SetThreadExecutionState", ...
-            prevExecState);
+            ES_CONTINUOUS);
 
         assert(ret ~= 0, ...
             "prevent_sleep_mode:WinApiCallFailure", ...
