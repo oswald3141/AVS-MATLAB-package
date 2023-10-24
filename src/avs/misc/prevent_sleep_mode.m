@@ -54,8 +54,10 @@ function prevent_sleep_mode(state)
         ES_CONTINUOUS = 0x80000000;
         ES_SYSTEM_REQUIRED = 0x00000001;
 
+        newExecState = bitor(ES_CONTINUOUS, ES_SYSTEM_REQUIRED);
+
         prevExecState = calllib("kernel32", "SetThreadExecutionState", ...
-            ES_CONTINUOUS | ES_SYSTEM_REQUIRED);
+            newExecState);
 
         assert(prevExecState ~= 0, ...
             "prevent_sleep_mode:WinApiCallFailure", ...
