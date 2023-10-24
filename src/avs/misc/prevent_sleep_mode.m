@@ -53,8 +53,10 @@ function prevent_sleep_mode(state)
         % See http://msdn.microsoft.com/en-us/library/windows/desktop/aa373208(v=vs.85).aspx
         ES_CONTINUOUS = 0x80000000;
         ES_SYSTEM_REQUIRED = 0x00000001;
+        ES_AWAYMODE_REQUIRED = 0x00000040;
 
-        newExecState = bitor(ES_CONTINUOUS, ES_SYSTEM_REQUIRED);
+        newExecState = bitor(bitor( ...
+            ES_CONTINUOUS, ES_SYSTEM_REQUIRED), ES_AWAYMODE_REQUIRED);
 
         prevExecState = calllib("kernel32", "SetThreadExecutionState", ...
             newExecState);
