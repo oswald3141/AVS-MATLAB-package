@@ -14,9 +14,8 @@ function prevent_sleep_mode(state)
 %       mex -setup C
 %   for further details.
 %
-%   The implementation is copied with small refinements from
+%   Credits to Francesco Montorsi for the initial implementation
 %   https://se.mathworks.com/matlabcentral/fileexchange/36194-insomnia-prevent-computer-sleep-mode
-%   Credits to Francesco Montorsi
 
     arguments(Input)
         state {mustBeMember(state, ["on" "off"])}
@@ -35,7 +34,8 @@ function prevent_sleep_mode(state)
         % Load kernel32 library
 
         % Header with SetThreadExecutionState prototype
-        header_fname = ".\prevent_sleep_mode.h";
+        thisFileFolder = fileparts(mfilename("fullpath"));
+        header_fname = thisFileFolder + "\prevent_sleep_mode.h";
 
         assert(isfile(header_fname), ...
             "prevent_sleep_mode:HeaderFileMissing", ...
