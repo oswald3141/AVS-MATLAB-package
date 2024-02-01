@@ -72,6 +72,7 @@ classdef Signal
         r = upsample(this, n, phase);
         r = downsample(this, n, phase);
         r = filter_without_transient(this, b, options);
+        r = apply(this, func);
     end
 
     methods(Access = public, Static)
