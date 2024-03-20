@@ -73,6 +73,7 @@ classdef Signal
         r = downsample(this, n, phase);
         r = filter_without_transient(this, b, options);
         r = apply(this, func);
+        this = clip(this, component, maxValue, minValue);
     end
 
     methods(Access = public, Static)
