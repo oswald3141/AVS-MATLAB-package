@@ -74,6 +74,7 @@ classdef Signal
         r = filter_without_transient(this, b, options);
         r = apply(this, func);
         this = clip(this, component, maxValue, minValue);
+        [sre, sim] = split_re_im(this);
     end
 
     methods(Access = public, Static)
