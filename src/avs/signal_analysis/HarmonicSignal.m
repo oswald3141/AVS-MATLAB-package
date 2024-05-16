@@ -21,7 +21,7 @@ classdef HarmonicSignal < Signal
             end
 
             t = (0:N-1).*(1./Fs);
-            s = A.*exp(1j*2*pi*fc*t + phi0);
+            s = A.*exp(1j*(2*pi*fc*t + phi0));
             
             this@Signal(s, Fs, description);
             this.fc= fc;
