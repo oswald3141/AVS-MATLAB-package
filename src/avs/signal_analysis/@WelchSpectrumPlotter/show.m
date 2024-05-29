@@ -29,24 +29,24 @@ Fsmax = max(Fs);
 % Prepare axes labels
 freqXlab = "Frequency, " + freqUnits;
 
-switch this.plotMagnType
+switch this.PlotMagnType
     case "Power"
         magnYlab = "Power";
     case "Amplitude"
         magnYlab = "Amplitude";
 end
 
-switch this.plotMagnUnits
+switch this.PlotMagnUnits
     case "Linear"
     case "Decibels"
         magnYlab = magnYlab + ", dB";
 end
 
-if this.plotNormalizeMagn == "yes"
+if this.PlotNormalizeMagn == "yes"
     magnYlab = magnYlab + " (norm.)";
 end
 
-switch this.plotPhsUnits
+switch this.PlotPhsUnits
     case "Radians"
         phsYlab = "Phase, rad.";
     case "Degrees"
@@ -56,21 +56,21 @@ end
 % Prepare axes
 figure;
 
-if contains(this.plotType, "Magn")
+if contains(this.PlotType, "Magn")
     magnAx = axes();
-    xlim(magnAx, this.xLim);
-    ylim(magnAx, this.magnYLim);
+    xlim(magnAx, this.XLim);
+    ylim(magnAx, this.MagnYLim);
     ylabel(magnAx, magnYlab);
-    grid(magnAx, this.gridMode);
+    grid(magnAx, this.GridMode);
     xlabel(magnAx, freqXlab);
 end
 
-if contains(this.plotType, "Phase")
+if contains(this.PlotType, "Phase")
     phsAx = axes();
-    xlim(phsAx, this.xLim);
-    ylim(phsAx, this.phsYLim);
+    xlim(phsAx, this.XLim);
+    ylim(phsAx, this.PhsYLim);
     ylabel(phsAx, phsYlab);
-    grid(phsAx, this.gridMode);
+    grid(phsAx, this.GridMode);
     xlabel(phsAx, freqXlab);
 end
 
@@ -84,16 +84,16 @@ for i = 1:length(sp)
     % Format spectrum data
     f_i = sp{i}.freqGrid/freqScale;
 
-    switch this.plotMagnType
+    switch this.PlotMagnType
         case "Power"
-            switch this.plotMagnUnits
+            switch this.PlotMagnUnits
                 case "Linear"
                     magn_i = sp{i}.power;
                 case "Decibels"
                     magn_i = pow2db(sp{i}.power);
             end
         case "Amplitude"
-            switch this.plotMagnUnits
+            switch this.PlotMagnUnits
                 case "Linear"
                     magn_i = sqrt(sp{i}.power);
                 case "Decibels"
@@ -101,8 +101,8 @@ for i = 1:length(sp)
             end
     end
 
-    if this.plotNormalizeMagn == "yes"
-        switch this.plotMagnUnits
+    if this.PlotNormalizeMagn == "yes"
+        switch this.PlotMagnUnits
             case "Linear"
                 magnNorm_i = magn_i/max(magn_i);
             case "Decibels"
@@ -112,7 +112,7 @@ for i = 1:length(sp)
         magnNorm_i = magn_i;
     end
 
-    switch this.plotPhsUnits
+    switch this.PlotPhsUnits
         case "Radians"
             phs_i = sp{i}.phase;
         case "Degrees"
@@ -120,29 +120,29 @@ for i = 1:length(sp)
     end
 
     % Plot the lines
-    if contains(this.plotType, "Magn")
+    if contains(this.PlotType, "Magn")
         hold(magnAx, "on");
-        plot(magnAx, f_i, magnNorm_i, "LineWidth", this.linesWidth);
+        plot(magnAx, f_i, magnNorm_i, "LineWidth", this.LinesWidth);
         hold(magnAx, "off");
     end
 
-    if contains(this.plotType, "Phase")
+    if contains(this.PlotType, "Phase")
         hold(phsAx, "on");
-        plot(phsAx, f_i, phs_i, "LineWidth", this.linesWidth);
+        plot(phsAx, f_i, phs_i, "LineWidth", this.LinesWidth);
         hold(phsAx, "off");
     end
 
 end
 
 if options.LegendNames ~= ""
-    if contains(this.plotType, "Magn")
+    if contains(this.PlotType, "Magn")
         legend(magnAx, options.LegendNames, ...
-            "Location", this.legendLocation);
+            "Location", this.LegendLocation);
     end
 
-    if contains(this.plotType, "Phase")
+    if contains(this.PlotType, "Phase")
         legend(phsAx, options.LegendNames, ...
-            "Location", this.legendLocation);
+            "Location", this.LegendLocation);
     end
 end
 
