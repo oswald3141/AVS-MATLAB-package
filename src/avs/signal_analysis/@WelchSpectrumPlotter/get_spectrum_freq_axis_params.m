@@ -1,4 +1,4 @@
-function [scale, unitName] = get_spectrum_freq_axis_params(~, FsMax)
+function [scale, unitName] = get_spectrum_freq_axis_params(FsMax)
 % GET_SPECTRUM_AXIS_PARAMS Return spectrum axis parameters
 %   [SCALE, UNITNAME] = GET_SPECTRUM_AXIS_PARAMS(FSMAX) returns name of the
 %   frequency units (Hz, kHz, MHz, GHz) and the corresponding scale factor.
