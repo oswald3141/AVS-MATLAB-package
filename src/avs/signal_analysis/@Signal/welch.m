@@ -24,7 +24,20 @@ end
 if isa(segmLengthOrAnalyzer, "WelchSpectrumAnalyzer")
     sp = segmLengthOrAnalyzer.do(this);
 elseif isnumeric(segmLengthOrAnalyzer) && (segmLengthOrAnalyzer > 0)
-    an = WelchSpectrumAnalyzer("SegmentLenght", segmLengthOrAnalyzer);
+    if segmLengthOrAnalyzer <= 1
+        an = WelchSpectrumAnalyzer( ...
+            "SegmentLengthRelative", segmLengthOrAnalyzer);
+    elseif floor(segmLengthOrAnalyzer) == segmLengthOrAnalyzer
+        an = WelchSpectrumAnalyzer( ...
+            "SegmentLenghtAbsolute", segmLengthOrAnalyzer, ...
+            "SegmentLengthRelative", []);
+    else
+        ME = MException("Signal:welch:invalidSegmentLength", ...
+            "The segment length must be either a number between " + ...
+            "0 and 1 (relative mode) or an integer.");
+        throw(ME);
+    end
+
     sp = an.do(this);
 else
     throw(MException( ...
