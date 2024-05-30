@@ -63,7 +63,7 @@ for i = nargout:-1:1
     ws.window = this.Window;
 
     if sigs{i}.n > 0
-        ws = this.compute_spectrum(sigs{i}, ws);
+        ws = WelchSpectrumAnalyzer.compute_spectrum(sigs{i}, ws);
         ws.freqGrid = ...
             ((-ws.segmentLength/2:ws.segmentLength/2-1) / ...
                 ws.segmentLength*ws.Fs)';
