@@ -75,7 +75,7 @@ if contains(this.PlotType, "Phase")
     xlabel(phsAx, freqXlab);
 end
 
-if (this.plotType == "Magn&Phase")
+if (this.PlotType == "Magn&Phase")
     subplot(2, 1, 1, magnAx);
     xlabel("");
     subplot(2, 1, 2, phsAx);
