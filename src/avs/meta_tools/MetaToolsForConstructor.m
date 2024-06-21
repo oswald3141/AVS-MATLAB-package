@@ -55,6 +55,52 @@ classdef(Abstract, Sealed) MetaToolsForConstructor
             own = rmfield_quiet(own, fieldnames(rest));
         end
 
+        function namedArgStruct = add_handle_defaults(namedArgStruct, opt)
+            % Add default handle objects properties to name-value arguments
+            %   Ensures that handle properties will be assigned in the
+            %   constructor, thus avoiding instances sharing the same
+            %   objects. Takes the default values from the class definition
+            %   and copies them.
+            arguments(Input)
+                namedArgStruct (1,1) {mustBeA(namedArgStruct, "struct")}
+                opt.Verbose (1,1) logical = true;
+            end
+
+            objClassName = string(extractBefore([dbstack(1).name], '.'));
+            mobj = meta.class.fromName(objClassName);
+            propList = [mobj.PropertyList];
+
+            for i = 1:length(propList)
+                p = propList(i);
+
+                if strcmp(p.SetAccess, 'public') && p.HasDefault
+                    if isa(p.DefaultValue, 'handle')
+                        if ~isfield(namedArgStruct, p.Name)
+                            if isa(p.DefaultValue, 'matlab.mixin.Copyable')
+                                namedArgStruct.(p.Name) = ...
+                                    copy(p.DefaultValue);
+                            else
+                                if opt.Verbose
+                                    warning(mobj.Name + ":" + ....
+                                        "MetaToolsForConstructor:" + ...
+                                        "add_handle_defaults:" + ...
+                                        "defaultNotCopyable", ...
+                                        "The default value of %s " + ...
+                                        "propery cannot be copied " + ...
+                                        "and will be reinitialized " + ...
+                                        "with default constructor.", ...
+                                        p.Name);
+                                end
+
+                                 namedArgStruct.(p.Name) = ...
+                                        eval(class(p.DefaultValue));
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
     end
 
 end
