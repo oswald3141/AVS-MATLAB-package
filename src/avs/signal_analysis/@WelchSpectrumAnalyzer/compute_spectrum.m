@@ -1,36 +1,38 @@
-function [pwr, phs, nSegm] = compute(this, s)
-% COMPUTE Compute Welch spectrum of a Signal
-%
-%   This is the internal method called by the constructor after setting up
-%   the main object's properties.
+function spec = compute_spectrum(sig, spec)
 
-ptsStep = this.Nfft - this.numOverlapPts;
+arguments
+    sig (1,1) Signal
+    spec (1,1) WelchSpectrum
+end
+
+ptsStep = spec.segmentLength - spec.numOverlapPts;
 iStart = 1;
-iEnd = iStart + this.Nfft - 1;
+iEnd = iStart + spec.segmentLength - 1;
 nBatch = 0;
 
-powTrace = zeros(this.Nfft, 1);
-phsTrace = zeros(this.Nfft, 1);
+powTrace = zeros(spec.segmentLength, 1);
+phsTrace = zeros(spec.segmentLength, 1);
 
 traceFuncs = dictionary( ...
     "Average", @(new, trc) trc + new, ...
     "MaxHold", @(new, trc) max([trc new], [], 2), ...
     "MinHold", @(new, trc) min([trc new], [], 2));
 
-pow_trace_func = traceFuncs(this.powTraceFuncName);
-phs_trace_func = traceFuncs(this.phsTraceFuncName);
+pow_trace_func = traceFuncs(spec.powTraceFunc);
+phs_trace_func = traceFuncs(spec.phsTraceFunc);
 
-spwin = this.get_spwin(this.Nfft);
+spwin = spec.get_spwin(spec.segmentLength);
 spwinDcEnergy = mean(spwin)^2;
 
-while iEnd <= s.n
-    sBatched = s.samples(iStart:iEnd);
+while iEnd <= sig.n
+    sBatched = sig.samples(iStart:iEnd);
 
     % Perform window weighting
     sBatchedWin = sBatched(:).*spwin;
 
     % Calculate the amplitude and phase spectrum separately for each batch
-    rawSp = fftshift(fft(sBatchedWin, this.Nfft)/this.Nfft);
+    rawSp = fftshift(fft( ...
+        sBatchedWin, spec.segmentLength)/spec.segmentLength);
 
     pow0 = rawSp.*conj(rawSp)/spwinDcEnergy;
     phs0 = angle(rawSp);
@@ -44,16 +46,16 @@ while iEnd <= s.n
     nBatch = nBatch + 1;
 end
 
-if this.powTraceFuncName == "Average"
+if spec.powTraceFunc == "Average"
     powTrace = powTrace./nBatch;
 end
 
-if this.phsTraceFuncName == "Average"
+if spec.phsTraceFunc == "Average"
     phsTrace = phsTrace./nBatch;
 end
 
-pwr = powTrace;
-phs = phsTrace;
-nSegm = nBatch;
+spec.power = powTrace;
+spec.phase = phsTrace;
+spec.nSegments = nBatch;
 
 end
