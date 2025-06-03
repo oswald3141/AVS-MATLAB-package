@@ -32,6 +32,7 @@ for i = nargout:-1:1
     ws = WelchSpectrum();
     ws.Fs = sigs{i}.Fs;
     ws.description = sigs{i}.description;
+    ws.isSymmetrical = ~sigs{i}.isComplex;
 
     if ~isempty(this.SegmentLenghtAbsolute)
         ws.segmentLength = this.SegmentLenghtAbsolute;

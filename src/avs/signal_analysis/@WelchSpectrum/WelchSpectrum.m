@@ -15,6 +15,8 @@ classdef WelchSpectrum
         % Frequencies for X axes
         freqGrid (1,:) {mustBeVector(freqGrid, "allow-all-empties"), ...
             mustBeReal} = [];
+        % Obtained from a real or complex signal
+        isSymmetrical (1,1) logical = true;
     end
 
     properties
