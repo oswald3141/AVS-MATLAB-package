@@ -91,14 +91,16 @@ for i = 1:length(sp)
                 case "Linear"
                     magn_i = sp{i}.power;
                 case "Decibels"
-                    magn_i = pow2db(sp{i}.power);
+                    sppwr = sp{i}.power;
+                    magn_i = pow2db(sppwr);
             end
         case "Amplitude"
             switch this.MagnitudeUnits
                 case "Linear"
                     magn_i = sqrt(sp{i}.power);
                 case "Decibels"
-                    magn_i = mag2db(sp{i}.power);
+                    spmag = sqrt(sp{i}.power);
+                    magn_i = mag2db(spmag);
             end
     end
 
