@@ -92,6 +92,7 @@ for i = 1:length(sp)
                     magn_i = sp{i}.power;
                 case "Decibels"
                     sppwr = sp{i}.power;
+                    sppwr(sppwr == 0) = realmin;
                     magn_i = pow2db(sppwr);
             end
         case "Amplitude"
@@ -100,6 +101,7 @@ for i = 1:length(sp)
                     magn_i = sqrt(sp{i}.power);
                 case "Decibels"
                     spmag = sqrt(sp{i}.power);
+                    spmag(spmag == 0) = realmin;
                     magn_i = mag2db(spmag);
             end
     end
