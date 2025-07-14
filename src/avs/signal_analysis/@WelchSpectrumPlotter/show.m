@@ -85,22 +85,28 @@ for i = 1:length(sp)
     % Format spectrum data
     f_i = sp{i}.freqGrid/freqScale;
 
+    if this.OneSided == "auto" && sp{i}.isSymmetrical
+        idx = f_i >= 0;
+        f_i = f_i(idx);
+        spPhs = sp{i}.phase(idx);
+        spPwr = sp{i}.power(idx)*2;
+    end
+
     switch this.MagnitudePlotType
         case "Power"
             switch this.MagnitudeUnits
                 case "Linear"
-                    magn_i = sp{i}.power;
+                    magn_i = spPwr;
                 case "Decibels"
-                    sppwr = sp{i}.power;
-                    sppwr(sppwr == 0) = realmin;
-                    magn_i = pow2db(sppwr);
+                    spPwr(spPwr == 0) = realmin;
+                    magn_i = pow2db(spPwr);
             end
         case "Amplitude"
             switch this.MagnitudeUnits
                 case "Linear"
-                    magn_i = sqrt(sp{i}.power);
+                    magn_i = sqrt(spPwr);
                 case "Decibels"
-                    spmag = sqrt(sp{i}.power);
+                    spmag = sqrt(spPwr);
                     spmag(spmag == 0) = realmin;
                     magn_i = mag2db(spmag);
             end
@@ -119,9 +125,9 @@ for i = 1:length(sp)
 
     switch this.PhaseUnits
         case "Radians"
-            phs_i = sp{i}.phase;
+            phs_i = spPhs;
         case "Degrees"
-            phs_i = rad2deg(sp{i}.phase);
+            phs_i = rad2deg(spPhs);
     end
 
     % Plot the lines

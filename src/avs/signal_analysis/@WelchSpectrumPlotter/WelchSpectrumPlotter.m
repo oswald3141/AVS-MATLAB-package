@@ -20,6 +20,9 @@ classdef WelchSpectrumPlotter < matlab.mixin.Copyable
         % Controls if the magnitude is normalized before plotting
         NormalizeMagnitude {mustBeMember(NormalizeMagnitude, ...
             ["yes", "no"])} = "yes"
+        % Controls if the spectrum is plotted as one-sided
+        OneSided {mustBeMember(OneSided, ...
+            ["auto", "no"])} = "auto"
 
         % Phase units (degrees or radians)
         PhaseUnits {mustBeMember(PhaseUnits, ...
