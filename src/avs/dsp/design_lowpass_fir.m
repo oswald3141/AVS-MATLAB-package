@@ -48,7 +48,11 @@ divs = options.OrderDivisors;
 if options.EvenOrder
     divs = [divs 2];
 end
+
 div = lcm_n(divs);
+if isempty(div)
+    div = 1;
+end
 
 if div == 1
     fltr = fltr0;
