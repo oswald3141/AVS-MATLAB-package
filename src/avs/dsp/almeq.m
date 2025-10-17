@@ -20,7 +20,7 @@ function r = almeq(a, b, abs_th, epsilon)
 
 arguments
     a double {mustBeReal}
-    b double {mustBeReal, mustHaveSameSize(b, a)}
+    b double {mustBeReal, mustHaveSameSize(b, a, "allow-scalar")}
     abs_th {mustBeNonnegative} = realmin;
     epsilon {mustBeInRange(epsilon, 0, 1, "exclusive")} = 128*eps();
 end
