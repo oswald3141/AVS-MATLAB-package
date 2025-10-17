@@ -41,7 +41,7 @@ M = options.DecimationFactor;
 
 % Filter parameters
 fltrLength = length(b);
-fltrGrpDel = round((fltrLength-1)/2);
+fltrGrpDel = floor((fltrLength-1)/2);
 transLengthIn = round(fltrGrpDel/L);
 
 % Padding parameters
