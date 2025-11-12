@@ -5,7 +5,7 @@ function mustBeOdd(A)
 %
 %   See also: MUSTBEEVEN, MUSTBEEVENPOWEROFTWO, MUSTBENATURALPOWEROFTWO
 
-if ~(isnumeric(A) || islogical(A))
+if ~isnumeric(A) && ~islogical(A)
     throwAsCaller(MException( ...
         "mustBeOdd:nonNumericOrLogicalInput", ...
         "The input must be numeric or logical."));

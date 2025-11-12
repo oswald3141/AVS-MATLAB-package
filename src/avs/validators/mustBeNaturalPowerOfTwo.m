@@ -6,7 +6,7 @@ function mustBeNaturalPowerOfTwo(A)
 %
 %   See also: MUSTBEEVENPOWEROFTWO
 
-if ~(isnumeric(A) || islogical(A))
+if ~isnumeric(A) && ~islogical(A)
     throwAsCaller(MException( ...
         "mustBeNaturalPowerOfTwo:nonNumericOrLogicalInput", ...
         "The input must be numeric or logical."));

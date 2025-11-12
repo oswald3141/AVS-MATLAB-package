@@ -7,7 +7,7 @@ function mustBeEvenPowerOfTwo(A)
 %
 %   See also: MUSTBENATURALPOWEROFTWO
 
-if ~(isnumeric(A) || islogical(A))
+if ~isnumeric(A) && ~islogical(A)
     throwAsCaller(MException( ...
         "mustBeEvenPowerOfTwo:nonNumericOrLogicalInput", ...
         "The input must be numeric or logical."));

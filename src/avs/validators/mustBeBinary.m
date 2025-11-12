@@ -4,7 +4,7 @@ function mustBeBinary(A)
 %   MUSTBEBINARY(A) throws an error if A contains any numbers other than
 %   "0" or "1".
 
-if ~(isnumeric(A) || islogical(A))
+if ~isnumeric(A) && ~islogical(A)
     throwAsCaller(MException( ...
         "mustBeBinary:nonNumericOrLogicalInput", ...
         "The input must be numeric or logical."));

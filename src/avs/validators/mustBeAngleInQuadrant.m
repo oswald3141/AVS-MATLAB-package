@@ -9,7 +9,7 @@ function mustBeAngleInQuadrant(A, Q)
 %   See also: MUSTBEANGLEWRAPPEDTO
 
 
-if ~(isnumeric(A) || islogical(A))
+if ~isnumeric(A) && ~islogical(A)
     throwAsCaller(MException( ...
         "mustBeAngleInQuadrant:nonNumericOrLogicalInput", ...
         "The input must be numeric or logical."));

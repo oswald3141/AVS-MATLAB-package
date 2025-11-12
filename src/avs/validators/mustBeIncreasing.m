@@ -10,7 +10,7 @@ arguments(Input)
     allowEqual (1,1) logical = false;
 end
 
-if ~(isnumeric(V) || islogical(V))
+if ~isnumeric(V) && ~islogical(V)
     throwAsCaller(MException( ...
         "mustBeIncreasing:nonNumericOrLogicalInput", ...
         "The input vector must be numeric or logical."));

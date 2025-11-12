@@ -8,7 +8,7 @@ function mustBeAngleWrappedTo(A, wrapVal)
 %
 %   See also: MUSTBEANGLEINQUADRANT
 
-if ~(isnumeric(A) || islogical(A))
+if ~isnumeric(A) && ~islogical(A)
     throwAsCaller(MException( ...
         "mustBeAngleWrappedTo:nonNumericOrLogicalInput", ...
         "The input must be numeric or logical."));
