@@ -1,15 +1,15 @@
-function mustBeObject(var)
-% MUSTBEOBJECT Validate that a variable is some class instance
+function mustBeObject(A)
+% MUSTBEOBJECT Validate that value is an object of a MATLAB class
 %
-%   MUSTBEOBJECT(VAR) throws an error if the passed variable is not some
-%   class instance. Instances of MATLAB numeric, logical, char, cell,
-%   struct, and function handle classes are NOT considered to be class
-%   instances.
+%   MUSTBEOBJECT(A) throws an error if A is not object of a MATLAB class.
+%   isobject is called to determine if A is an object of a MATLAB class.
+%   Instances of MATLAB numeric, logical, char, cell, struct, and function
+%   handle classes are NOT considered to be objects. 
 
-if ~isobject(var)
+if ~isobject(A)
     throwAsCaller(MException( ...
-        "mustBeObject:notAnObject", ...
-        "The input variable must be some class instance."))
+        "AVS:validators:mustBeObject", ...
+        "Value must be a class instance."))
 end
 
 end

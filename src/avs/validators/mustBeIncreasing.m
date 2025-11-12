@@ -1,44 +1,69 @@
-function mustBeIncreasing(V, allowEqual)
+function mustBeIncreasing(A, flag)
 % MUSTBEINCREASING Validate that values in a vector are increasing
 %
-%   MUSTBEINCREASING(A, ALLOWEQUAL) throws an error if values in A are not
-%   increasing from an element to element. If ALLOWEQUAL is set to "true",
-%   the values may stay the same, but they still must not decrease.
+%   MUSTBEINCREASING(A) throws an error if values in A are not increasing
+%   from an element to element.
+% 
+%   MUSTBEINCREASING(A, FLAG) Optional flag FLAG indicate if consequtive
+%   values in A are allowed to be the same. The value of the optional flag
+%   must be "allow-equal".
+% 
+%   See also: MUSTBEDECREASING
 
-arguments(Input)
-    V
-    allowEqual (1,1) logical = false;
-end
-
-if ~isnumeric(V) && ~islogical(V)
+if ~isnumeric(A) && ~islogical(A)
     throwAsCaller(MException( ...
-        "mustBeIncreasing:nonNumericOrLogicalInput", ...
-        "The input vector must be numeric or logical."));
+        "AVS:validators:mustBeNumericOrLogical", ...
+        "Value must be numeric or logical."));
 end
 
-if ~isreal(V)
+if ~isreal(A)
     throwAsCaller(MException( ...
-        "mustBeIncreasing:nonRealInput", ...
-        "The input vector must be real."));
+        "AVS:validators:mustBeReal", ...
+        "Value must be real."));
 end
 
-if ~(isvector(V) && (length(V) > 1))
+if ~isvector(A)
     throwAsCaller(MException( ...
-        "mustBeIncreasing:inputNotVector", ...
-        "The input must be a vector."));
+        "AVS:validators:mustBeVector", ...
+        "Value must be a 1-by-n vector or an n-by-1 vector."));
 end
 
-dA = diff(V);
+if isempty(A)
+    throwAsCaller(MException( ...
+        "AVS:validators:mustBeNonempty", ...
+        "Value must not be empty."));
+end
+
+allowEqual = false;
+if nargin > 1
+    if ~(ischar(flag) && isrow(flag)) && ...
+                                        ~(isstring(flag) && isscalar(flag))
+        error("AVS:validation:UnableToConvert", ...
+            "Invalid argument at position 2. " + ...
+            "Value must be 'allow-equal' or not specified.");
+    end
+
+    if strcmp(flag, "allow-equal")
+        allowEqual = true;
+    else
+        error("AVS:validation:UnableToConvert", ...
+            "Invalid argument at position 2. " + ...
+            "Value must be 'allow-equal' or not specified.");
+    end
+end
+
 if(allowEqual)
-    increasing = all((dA >= 0));
+    if ~all((diff(A) >= 0))
+        throwAsCaller(MException( ...
+            "AVS:validators:mustBeIncreasing", ...
+            "Values must increase or be equal."));
+    end
 else
-    increasing = all((dA >  0));
-end
-
-if ~increasing
-    throwAsCaller(MException( ...
-        "mustBeIncreasing:nonIncreasing", ...
-        "Values in the input array must increase."));
+    if ~all((diff(A) >  0))
+        throwAsCaller(MException( ...
+            "AVS:validators:mustBeIncreasing", ...
+            "Values must increase."));
+    end
 end
 
 end
