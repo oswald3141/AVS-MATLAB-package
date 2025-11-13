@@ -22,7 +22,7 @@ arguments
     a double {mustBeReal}
     b double {mustBeReal, mustHaveSameSize(b, a, "allow-scalar")}
     abs_th {mustBeNonnegative} = realmin;
-    epsilon {mustBeInRange(epsilon, 0, 1, "exclusive")} = 128*eps();
+    epsilon {mustBePositive, mustBeLessThanOrEqual(epsilon,1)} = 128*eps();
 end
 
 assert(epsilon >= eps());
