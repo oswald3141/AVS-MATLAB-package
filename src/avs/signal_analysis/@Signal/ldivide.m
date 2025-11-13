@@ -4,12 +4,26 @@ function r = ldivide(a, b)
 %    R = LDIVIDE(A, B) divides B by A if one of them is Signal and the
 %    other one is either Signal or a numeric value. Performs dimensions
 %    expansion if necessary.
-%    R inherits "description" property of A unless it is numeric. In such a
-%    case the property of B is inherited.
 %    This call also represents overloaded "left divide" operator, so it
 %    can be performed as
 %       R = A.\B;
 
-r = apply_basic_bin_op(a, b, @ldivide);
+if ~isa(a, "Signal")
+    [a, b] = swap(a,b);
+end
+
+if isa(b, "Signal")
+    r = Signal.bsxfun(@f1, a, b);
+else
+    r = Signal.bsxfun(@f2, a, b);
+end
+
+    function a = f1(a, b)
+        a.samples = a.samples.\b.samples;
+    end
+
+    function a = f2(a, b)
+        a.samples = a.samples.\b;
+    end
 
 end

@@ -81,6 +81,7 @@ classdef Signal
         r = sum(a);
         r = abs(a);
         r = angle(a);
+        r = bsxfun(fun, a, b);
     end
 
     methods
