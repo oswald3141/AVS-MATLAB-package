@@ -14,11 +14,16 @@ end
 
 if isa(b, "Signal")
     r = Signal.bsxfun(@f1, a, b);
-else
+elseif isnumeric(b)
     r = Signal.bsxfun(@f2, a, b);
+else
+    throw(MException( ...
+        "Signal:arithmeticBinaryOpeation:mustBeNumericOrSignal", ...
+        "Value must be numeric or Signal."))
 end
 
     function a = f1(a, b)
+        check_arith_bin_op_compatibility(a, b);
         a.samples = a.samples.\b.samples;
     end
 
