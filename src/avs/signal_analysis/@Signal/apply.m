@@ -1,15 +1,13 @@
-function r = apply(this, func)
+function this = apply(this, func)
 % APPLY Applies a function to the signal's samples
 %
-%   R = APPLY(THIS, FUNC) calles FUNC on the signal's samples vector.
-%   Leaves "description" property of THIS unchanged.
+%   THIS = APPLY(THIS, FUNC) calles FUNC on the signal's samples vector.
 
 arguments(Input)
     this (1,1) Signal
     func (1,1) {mustBeA(func, "function_handle")}
 end
 
-r = this;
-r.samples = func(r.samples);
+this.samples = func(this.samples);
 
 end

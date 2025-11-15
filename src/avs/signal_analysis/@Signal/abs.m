@@ -1,21 +1,11 @@
-function r = abs(a)
+function a = abs(a)
 % ABS Absolute value of a signal
 %
-%   R = ABS(A) returns signal R samples of which are the absolute values of
-%   the signal's A samples. If A is an array, the operation is performed
-%   for each element in it.
-%   Leaves the description of R empty.
+%   A = ABS(A) returns a signal, whose samples are the absolute values of
+%   the signal's A samples.
 
-arguments(Input)
-    a Signal
+for i = 1:numel(a)
+    a(i).samples = abs(a(i).samples);
 end
-
-N = numel(a);
-
-for i = N:-1:1
-    r(i) = Signal(abs(a(i).samples), a(i).Fs, "");
-end
-
-r = reshape(r, size(a));
 
 end
