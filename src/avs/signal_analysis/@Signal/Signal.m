@@ -59,28 +59,28 @@ classdef Signal
         % Overloading of MATLAB basic operators
         r = plus(a, b);
         r = minus(a, b);
-        r = uminus(a);
+        a = uminus(a);
         r = times(a, b);
         r = rdivide(a, b);
         r = ldivide(a, b);
         r = power(a, b);
         r = ne(a, b);
         r = eq(a, b);
-        r = conj(a);
+        a = conj(a);
+        a = abs(a);
+        a = angle(a);
         
         % Other signal processing functions
         r = upsample(this, n, phase);
         r = downsample(this, n, phase);
         r = filter_without_transient(this, b, options);
-        r = apply(this, func);
+        this = apply(this, func);
         this = clip(this, component, maxValue, minValue);
         [sre, sim] = split_re_im(this);
     end
 
     methods(Access = public, Static)
         r = sum(a);
-        r = abs(a);
-        r = angle(a);
         r = bsxfun(fun, a, b);
     end
 
