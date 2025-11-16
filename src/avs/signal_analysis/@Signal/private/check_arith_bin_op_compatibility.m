@@ -1,7 +1,7 @@
 function check_arith_bin_op_compatibility(s1, s2)
 
-n1 = s1.n;
-n2 = s2.n;
+n1 = numel(s1.samples);
+n2 = numel(s2.samples);
 
 if n1 ~= n2
     if n1 ~= 1 && n2 ~= 1
