@@ -1,34 +1,31 @@
-function r = ldivide(a, b)
+function a = ldivide(a, b)
 % LDIVIDE Divides signal with another signal or a numeric value
 %
-%    R = LDIVIDE(A, B) divides B by A if one of them is Signal and the
-%    other one is either Signal or a numeric value. Performs dimensions
-%    expansion if necessary.
-%    This call also represents overloaded "left divide" operator, so it
-%    can be performed as
-%       R = A.\B;
+%   A = LDIVIDE(A, B) divides B by A if one of them is Signal and the
+%   other one is either Signal or a numeric value. Performs dimensions
+%   expansion if necessary.
 
-if ~isa(a, "Signal")
-    [a, b] = swap(a,b);
+arguments
+    a 
+    b {mustHaveCompatibleSizes(a, b)}
 end
 
-if isa(b, "Signal")
-    r = Signal.bsxfun(@f1, a, b);
-elseif isnumeric(b)
-    r = Signal.bsxfun(@f2, a, b);
+aIsSig = isa(a, "Signal");
+bIsSig = isa(b, "Signal");
+aIsNum = isnumeric(a);
+bIsNum = isnumeric(b);
+
+if aIsSig && bIsSig
+    a = bsxfun_arith(@ldivide_sig_sig, a, b);
+elseif aIsSig && bIsNum
+    a = bsxfun_arith(@ldivide_sig_num, a, b);
+elseif bIsSig && aIsNum
+    b = bsxfun_arith(@ldivide_sig_num, b, a);
+    a = b;
 else
     throw(MException( ...
-        "Signal:arithmeticBinaryOpeation:mustBeNumericOrSignal", ...
+        "Signal:ldivide:mustBeNumericOrSignal", ...
         "Value must be numeric or Signal."))
 end
-
-    function a = f1(a, b)
-        check_arith_bin_op_compatibility(a, b);
-        a.samples = a.samples.\b.samples;
-    end
-
-    function a = f2(a, b)
-        a.samples = a.samples.\b;
-    end
 
 end
