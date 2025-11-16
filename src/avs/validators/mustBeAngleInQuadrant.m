@@ -1,5 +1,5 @@
 function mustBeAngleInQuadrant(A, Q)
-% MUSTBEANGLEINQUADRANT Validate that value in an angle from a quadrant
+% MUSTBEANGLEINQUADRANT Validate that value is an angle from a quadrant
 %
 %   MUSTBEANGLEINQUADRANT(A, Q) throws an error if A contains angles
 %   outside the quadrants specified in Q. Q must be a vector with integer

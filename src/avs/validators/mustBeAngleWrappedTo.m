@@ -1,5 +1,5 @@
 function mustBeAngleWrappedTo(A, WV)
-% MUSTBEANGLEWRAPPEDTO Validate that value in an angle wrapped to a value
+% MUSTBEANGLEWRAPPEDTO Validate that value is an angle wrapped to a value
 %
 %   MUSTBEANGLEWRAPPEDTO(A, WV) throws an error if A contains angles
 %   not wrapped to WV.
