@@ -57,13 +57,13 @@ classdef Signal
 
     methods(Access = public)
         % Overloading of MATLAB basic operators
-        r = plus(a, b);
-        r = minus(a, b);
+        a = plus(a, b);
+        a = minus(a, b);
         a = uminus(a);
-        r = times(a, b);
-        r = rdivide(a, b);
-        r = ldivide(a, b);
-        r = power(a, b);
+        a = times(a, b);
+        a = rdivide(a, b);
+        a = ldivide(a, b);
+        a = power(a, b);
         r = ne(a, b);
         r = eq(a, b);
         a = conj(a);
