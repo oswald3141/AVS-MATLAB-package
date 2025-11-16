@@ -16,6 +16,13 @@ function mustHaveSameSize(A, B, flag1, flag2)
 %
 %   MUSTHAVESAMESIZE(A, B, "allow-all-empties", "allow-scalar") a
 %   combination of the two previous options.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
+%
+%   See also: MUSTHAVESAMESIZE
 
 allowAllEmpty = false;
 allowScalar = false;

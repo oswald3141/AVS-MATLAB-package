@@ -5,6 +5,11 @@ function mustBeEvenPowerOfTwo(A)
 %   not an even power of 2. For example, 2^-2, 2^4, 2^8 or 2^-8 will not
 %   cause an error, while 2^3, 2^5, 2^7 or 2^-11 will.
 %
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
+%
 %   See also: MUSTBENATURALPOWEROFTWO
 
 if ~isnumeric(A) && ~islogical(A)

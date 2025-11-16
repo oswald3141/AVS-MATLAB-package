@@ -3,6 +3,11 @@ function mustBeBinary(A)
 %
 %   MUSTBEBINARY(A) throws an error if A contains any numbers other than
 %   "0" or "1".
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 if ~isnumeric(A) && ~islogical(A)
     throwAsCaller(MException( ...

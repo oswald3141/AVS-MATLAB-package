@@ -6,6 +6,11 @@ function mustBeAngleInQuadrant(A, Q)
 %   quadrant numbers from 1 to 4. Values in A must be all wrapped to the
 %   same range, e.g [0; 2pi], [0; 360], [-pi; pi], or [-180; 180].
 %
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
+%
 %   See also: MUSTBEANGLEWRAPPEDTO
 
 if ~isnumeric(A) && ~islogical(A)

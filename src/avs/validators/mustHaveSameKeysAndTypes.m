@@ -3,6 +3,11 @@ function mustHaveSameKeysAndTypes(d1, d2)
 %
 %   MUSTHAVESAMEKEYSANDTYPES(D1, D2) throws an error if the types or keys
 %   of D1 and D2 differ.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 if class(d1) ~= "dictionary"
     throwAsCaller(MException( ...

@@ -4,6 +4,11 @@ function mustBeNaturalPowerOfTwo(A)
 %   MUSTBENATURALPOWEROFTWO(A) throws an error if A contains numbers which
 %   are not a natural power of 2.
 %
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
+%
 %   See also: MUSTBEEVENPOWEROFTWO
 
 if ~isnumeric(A) && ~islogical(A)

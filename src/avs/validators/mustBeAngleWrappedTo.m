@@ -9,6 +9,11 @@ function mustBeAngleWrappedTo(A, WV)
 %       "180"
 %       "360"
 %
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
+%
 %   See also: MUSTBEANGLEINQUADRANT
 
 if ~isnumeric(A) && ~islogical(A)

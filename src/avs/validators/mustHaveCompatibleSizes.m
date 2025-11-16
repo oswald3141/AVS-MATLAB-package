@@ -5,6 +5,13 @@ function mustHaveCompatibleSizes(A, B)
 %   incompatible. Two arrays have compatible sizes if, for every
 %   dimension, the dimension sizes of the arrays are either the same or
 %   one of them is 1.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
+%
+%   See also: MUSTHAVESAMESIZE
 
 as = size(A);
 bs = size(B);

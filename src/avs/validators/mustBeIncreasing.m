@@ -7,7 +7,12 @@ function mustBeIncreasing(A, flag)
 %   MUSTBEINCREASING(A, FLAG) Optional flag FLAG indicate if consequtive
 %   values in A are allowed to be the same. The value of the optional flag
 %   must be "allow-equal".
-% 
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
+%
 %   See also: MUSTBEDECREASING
 
 if ~isnumeric(A) && ~islogical(A)

@@ -3,7 +3,11 @@ function mustBeAxisLimits(A)
 %
 %   MUSTBEAXISLIMITS(A) throws an error if A is not "auto" a 2-element
 %   vector of increasing numeric values.
-
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 if (ischar(A) && isrow(A)) || (isstring(A) && isscalar(A))
     if ~strcmp(A, "auto")
