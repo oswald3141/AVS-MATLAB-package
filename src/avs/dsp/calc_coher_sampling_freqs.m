@@ -9,6 +9,11 @@ function [fcin, fcs] = calc_coher_sampling_freqs(fin, fs, nrec, sigfig)
 %
 %   See https://www.analog.com/en/resources/design-notes/coherent-sampling-calculator-csc.html
 %   for further details.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments
     fin (1,1) {mustBeNonnegative}
@@ -17,13 +22,11 @@ arguments
     sigfig (1,1) {mustBeNonnegative, mustBeInteger} = 4;
 end
 
-round_odd = @(x) 2*floor(x/2)+1; % Only for integer x > 0!
-
 fbin = fs/nrec;
 fcbin = round(fbin, sigfig);
 fcs = round(fcbin*nrec, sigfig);
 nwin = fin/fcs*nrec;
-ncwin = round_odd(floor(nwin) + 1);
+ncwin = 2*floor( (floor(nwin) + 1) / 2 ) + 1; % to closest (next) odd
 fcin = round(fcs*ncwin/nrec, sigfig);
 
 end

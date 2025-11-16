@@ -24,6 +24,11 @@ function y = filter_without_transient(b, x, options)
 %   its group delay is fractional. Because of that, this function will
 %   compensate for this delay imperfectly, leaving residual phase
 %   distortion in the output signal.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments(Input)
     b {mustBeVector, mustBeReal}
