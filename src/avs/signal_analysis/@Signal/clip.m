@@ -1,11 +1,16 @@
 function this = clip(this, type, maxValue, minValue)
-% CLIP Clips samples to the specified boundries
+% CLIP Clip samples to the specified boundries
 %
 %   THIS = CLIP(THIS, TYPE, MAXVALUE, MINVALUE) limits the real part (if
 %   TYPE is set to "re"), imaginary part (if TYPE is set to "im"), both of
 %   them (if TYPE is set to "reim", or the absolute value (if TYPE is set
 %   to "abs") of the samples to the [minValue; maxValue] range.
 %   MAXVALUE must be greater that or equal to MINVALUE.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments(Input)
     this (1,1) Signal

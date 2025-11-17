@@ -1,9 +1,14 @@
 function a = minus(a, b)
-% MINUS Subtracts a signal or a numeric value from a signal
+% MINUS Subtracts a signal or a numeric array from a signal
 %
 %   A = MINUS(A, B) subtracts A from B if one of them is Signal and the
-%   other one is either Signal or a numeric value. Performs dimensions
+%   other one is either Signal or a numeric array. Performs dimensions
 %   expansion if necessary.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments
     a 

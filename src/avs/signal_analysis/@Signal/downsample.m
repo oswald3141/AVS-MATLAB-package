@@ -3,6 +3,11 @@ function this = downsample(this, n, phase)
 %
 %   THIS = DOWNSAMPLE(THIS, N, PHASE) calls DOWNSAMPLE from MATLAB's
 %   standard library for the signal's samples and updates its sample rate.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments(Input)
     this (1,1) Signal

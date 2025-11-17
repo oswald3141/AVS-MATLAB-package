@@ -1,9 +1,14 @@
 function a = times(a, b)
-% TIMES Multiplies signal with another signal or a numeric value
+% TIMES Multiplies a signal with another signal or a numeric array
 %
 %   A = TIMES(A, B) multiplies A with B if one of them is Signal and the
-%   other one is either Signal or a numeric value. Performs dimensions
+%   other one is either Signal or a numeric array. Performs dimensions
 %   expansion if necessary.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments
     a 

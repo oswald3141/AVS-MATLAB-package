@@ -1,5 +1,5 @@
 function varargout = plot(this, func, varargin)
-% PLOT Plot a Signal's component (re or im)
+% PLOT Plot samples processed by a function
 %
 %   PLOT(THIS, FUNC, ARG1, ARG2, ..., ARGN) plots samples of THIS appplying
 %   FUNC and using the  time vector THIS.t. By default, plots the real part
@@ -11,6 +11,11 @@ function varargout = plot(this, func, varargin)
 %   to satisfy its syntax.
 %
 %   P = PLOT(...) returnes the line object.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments(Input)
     this (1,1) Signal

@@ -1,9 +1,13 @@
 function r = sum(a, dim)
-% SUM Sums signals in a vector
+% SUM Sums signals
 %
-%   R = SUM(A) adds together the samples of all the signals in A. The
-%   signals must have the same length and sample rate.
-%   Leaves the description of R empty.
+%   R = SUM(A) returns the sum of the signals of A along the array
+%   dimension DIM. The signals must have the same length and sample rate.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments(Input)
     a

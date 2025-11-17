@@ -1,9 +1,14 @@
 function a = rdivide(a, b)
-% RDIVIDE Divides signal with another signal or a numeric value
+% RDIVIDE Right array division with another signal or a numeric array
 %
 %   A = RDIVIDE(A, B) divides A by B if one of them is Signal and the
-%   other one is either Signal or a numeric value. Performs dimensions
+%   other one is either Signal or a numeric array. Performs dimensions
 %   expansion if necessary.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments
     a 

@@ -1,17 +1,17 @@
 classdef Signal
-% SIGNAL A class combining samples with sample rate and optional note
+% SIGNAL Samples with associated sample rate and optional description
 %
 %   The class provides a container for assotiating a signal with its sample
-%   rate. It also defines the basic arithmetic operations for singlas and
-%   numeric constants.
+%   rate. It defines basic numeric constants, arithmetic operations, and
+%   other signal processing function.
 
     properties(SetAccess = public, GetAccess = public)
-        % A row-vector with Signal's samples
+        % A row-vector with samples
         samples (1,:) {mustBeVector(samples, "allow-all-empties"), ...
             mustBeNumeric} = [];
-        % Sample rate
+        % Sample rate in Hz
         Fs {mustBeScalarOrEmpty, mustBePositive} = [];
-        % Optional, disregarded in comparisons.
+        % Optional description, disregarded in comparisons
         description {mustBeTextScalar} = "";
     end
 
@@ -19,9 +19,9 @@ classdef Signal
         n          % Number of samples
         Ts         % Sampling period, s
         isComplex  % True if the samples are complex-valued
-        t          % Time vector from 0 s for convenience of plotting
+        t          % Time vector from 0 s
         re         % Alias for a vector with real part of each sample
-        im         % Alias for a vector with  imaginary part of each sample
+        im         % Alias for a vector with imaginary part of each sample
         normalized % Signal with samples normalized to max. abs. value
     end
 
@@ -40,19 +40,16 @@ classdef Signal
     end
 
     methods(Static, Access = public)
-        % Create an object from a structure
+        r = bsxfun(fun, a, b);
+
         this = from_struct(s)
     end
 
     methods(Access = public)
-        % Convert an object to a structure
         s = to_struct(this)
 
-        % Plot the specified Signal's component (re or im)
         varargout = plot(this, func, varargin)
-    end
 
-    methods(Access = public)
         % Overloading of MATLAB basic operators
         a = plus(a, b);
         a = minus(a, b);
@@ -66,19 +63,17 @@ classdef Signal
         a = conj(a);
         a = abs(a);
         a = angle(a);
-        
-        % Other signal processing functions
+
+        % Other overloaded functions
         r = sum(a, dim);
         this = upsample(this, n, phase);
         this = downsample(this, n, phase);
-        this = filter_without_transient(this, b, options);
+
+        % Other signal processing functions
         this = apply(this, func);
+        this = filter_without_transient(this, b, options);
         this = clip(this, component, maxValue, minValue);
         [sre, sim] = split_re_im(this);
-    end
-
-    methods(Access = public, Static)
-        r = bsxfun(fun, a, b);
     end
 
     methods
@@ -109,7 +104,6 @@ classdef Signal
         function this = get.normalized(this)
             this.samples = this.samples./max(abs(this.samples));
         end
-
     end
 
 end

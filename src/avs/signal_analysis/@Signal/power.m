@@ -1,9 +1,14 @@
 function a = power(a, b)
-% POWER Raises signal into a given power
+% POWER Raise each sample to the given power
 %
 %   A = POWER(A, B) raises each sample of each element of A into a
-%   corresponding power from B. B must be a numeric array. Performs
-%   dimensions expansion if necessary.
+%   corresponding power from B. A and be must be a Signal or a numeric
+%   array. Performs dimensions expansion if necessary.
+%
+%   The code is distributed under The MIT License
+%   Copyright (c) 2025 Andrei Smoliakov
+%       (main 'at' avsm 'punto' me)
+%   See LICENSE for the complete license text
 
 arguments
     a 
