@@ -1,4 +1,5 @@
 function a = bsxfun_arith(fun, a, b)
+% BSXFUN_ARITH Optimally compute bsxfun for a arithmetic operation
 
 if isequal(size(a), size(b))
     for i = 1:numel(a)

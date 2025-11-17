@@ -1,4 +1,8 @@
 function [aIdx, bIdx] = get_bsx_out_idx_combinations(as, bs)
+% GET_BSX_OUT_IDX_COMBINATIONS Calc order for bsxfun
+%
+%   [AIDX, BIDX] = GET_BSX_OUT_IDX_COMBINATIONS(AS, BS) calculates indicies
+%   AIDX and BIDX such that C = 
 
 ml = max(length(as), length(bs));
 as(end+1:ml) = 1;
