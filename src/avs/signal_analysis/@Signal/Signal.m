@@ -49,7 +49,7 @@ classdef Signal
         s = to_struct(this)
 
         % Plot the specified Signal's component (re or im)
-        varargout = plot(this, component, varargin)
+        varargout = plot(this, func, varargin)
 
         % Compute Welch spectrum of the signal
         sp = welch(this, segmLengthOrAnalyzer)
@@ -71,16 +71,16 @@ classdef Signal
         a = angle(a);
         
         % Other signal processing functions
-        r = upsample(this, n, phase);
-        r = downsample(this, n, phase);
-        r = filter_without_transient(this, b, options);
+        r = sum(a, dim);
+        this = upsample(this, n, phase);
+        this = downsample(this, n, phase);
+        this = filter_without_transient(this, b, options);
         this = apply(this, func);
         this = clip(this, component, maxValue, minValue);
         [sre, sim] = split_re_im(this);
     end
 
     methods(Access = public, Static)
-        r = sum(a);
         r = bsxfun(fun, a, b);
     end
 
@@ -109,9 +109,8 @@ classdef Signal
             val = imag(this.samples);
         end
 
-        function sig = get.normalized(this)
-            sig = this;
-            sig.samples = this.samples./max(abs(this.samples));
+        function this = get.normalized(this)
+            this.samples = this.samples./max(abs(this.samples));
         end
 
     end
