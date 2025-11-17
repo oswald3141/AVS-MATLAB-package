@@ -1,21 +1,20 @@
-function varargout = plot(this, component, varargin)
+function varargout = plot(this, func, varargin)
 % PLOT Plot a Signal's component (re or im)
 %
-%   PLOT(THIS, COMPONENT, ARG1, ARG2, ..., ARGN) plots real (if COMPONENT
-%   is set to "re") or imaginary (if COMPONENT is set to "im") component of
-%   THIS using the time vector from this object (THIS.t).
-%   By default plots the real part.
+%   PLOT(THIS, FUNC, ARG1, ARG2, ..., ARGN) plots samples of THIS appplying
+%   FUNC and using the  time vector THIS.t. By default, plots the real part
+%   of THIS (FUNC is set to @real).
+%
 %   Uses buil-in "plot" function and passes all the additional arguments to
-%   it directly in the same order. Makes exception only if ARG1 is an axes
-%   object. In such a case passes it as a first argument to MATLAB's "plot"
+%   it directly in the same order. An exception is made only if ARG1 is an
+%   axes object, in which case it is passeed to "plot" as a first argument
 %   to satisfy its syntax.
 %
 %   P = PLOT(...) returnes the line object.
 
 arguments(Input)
     this (1,1) Signal
-    component {mustBeMember(component, ["re" "im"])} = ...
-        "re";
+    func (1,1) {mustBeA(func, "function_handle")} = @real;
 end
 
 arguments(Input, Repeating)
@@ -28,19 +27,10 @@ if (nargin > 2) && isa(varargin{1}, "matlab.graphics.axis.Axes")
     varargin(1) = [];
 end
 
-switch (component)
-    case "re"
-        p = ...
-            plot(ax, this.t, real(this.samples), varargin{:});
-    case "im"
-        p = ...
-            plot(ax, this.t, imag(this.samples), varargin{:});
-    otherwise
-        assert(0);
-end
-
 if nargout == 1
-    varargout{1} = p;
+    varargout{1} = plot(ax, this.t, func(this.samples), varargin{:});
+else
+    plot(ax, this.t, func(this.samples), varargin{:});
 end
 
 end
