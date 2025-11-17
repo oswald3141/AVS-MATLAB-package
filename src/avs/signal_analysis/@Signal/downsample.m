@@ -1,9 +1,8 @@
-function r = downsample(this, n, phase)
+function this = downsample(this, n, phase)
 % DOWNSAMPLE Decrease sample rate by integer factor
 %
-%    R = DOWNSAMPLE(THIS, N, PHASE) calls DOWNSAMPLE from MATLAB's
-%    standard library for the signal's samples and updates its sampling
-%    rate. Leaves "description" property of THIS unchanged.
+%   THIS = DOWNSAMPLE(THIS, N, PHASE) calls DOWNSAMPLE from MATLAB's
+%   standard library for the signal's samples and updates its sample rate.
 
 arguments(Input)
     this (1,1) Signal
@@ -11,8 +10,7 @@ arguments(Input)
     phase (1,1) {mustBeInteger, mustBeNonnegative} = 0
 end
 
-r = this;
-r.samples = downsample(this.samples, n, phase);
-r.Fs = this.Fs/n;
+this.samples = downsample(this.samples, n, phase);
+this.Fs = this.Fs/n;
 
 end
