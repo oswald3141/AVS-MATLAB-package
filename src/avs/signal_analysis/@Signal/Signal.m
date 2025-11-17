@@ -50,7 +50,7 @@ classdef Signal
 
         varargout = plot(this, func, varargin)
 
-        % Overloading of MATLAB basic operators
+        % Overloaded arithmetic operators
         a = plus(a, b);
         a = minus(a, b);
         a = uminus(a);
@@ -61,15 +61,15 @@ classdef Signal
         r = ne(a, b);
         r = eq(a, b);
         a = conj(a);
+
+        % Overloaded MATLAB functions
         a = abs(a);
         a = angle(a);
-
-        % Other overloaded functions
         r = sum(a, dim);
         this = upsample(this, n, phase);
         this = downsample(this, n, phase);
 
-        % Other signal processing functions
+        % Custom signal processing functions
         this = apply(this, func);
         this = filter_without_transient(this, b, options);
         this = clip(this, component, maxValue, minValue);
