@@ -50,9 +50,6 @@ classdef Signal
 
         % Plot the specified Signal's component (re or im)
         varargout = plot(this, func, varargin)
-
-        % Compute Welch spectrum of the signal
-        sp = welch(this, segmLengthOrAnalyzer)
     end
 
     methods(Access = public)
