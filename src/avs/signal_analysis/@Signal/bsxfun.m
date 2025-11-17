@@ -30,7 +30,7 @@ arguments
         zeros(1, a(1).n, "like", 1+1j*double(a(1).isComplex)), 1);
 end
 
-[aIdx, bIdx] = get_bsx_out_idx_combinations(size(a), size(b));
+[aIdx, bIdx] = calc_indices_for_bsx(size(a), size(b));
 
 r = createArray(size(aIdx), "FillValue", preallocVal);
 
