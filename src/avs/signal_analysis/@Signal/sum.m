@@ -1,8 +1,18 @@
 function r = sum(a, dim)
 % SUM Sums signals
 %
-%   R = SUM(A) returns the sum of the signals of A along the array
-%   dimension DIM. The signals must have the same length and sample rate.
+%   R = SUM(A) returns the sample-wise sum of the signals of A along the
+%   first dimension whose size does not equal 1.
+%   The signals in A must have the same length and sample rate.
+%
+%   R = SUM(A, "all") returns the sum of all signals of A.
+%
+%   R = SUM(A, DIM) returns the sum along dimension DIM.
+%
+%   R = SUM(A, VECDIM) sums the signals of A based on the dimensions
+%   specified in the vector VECDIM.
+%
+%   Overall, this function behaves similarly to the built-in SUM.
 %
 %   The code is distributed under The MIT License
 %   Copyright (c) 2025 Andrei Smoliakov
@@ -11,7 +21,7 @@ function r = sum(a, dim)
 
 arguments(Input)
     a
-    dim = 1; % dim, vecdim, or "all"
+    dim = []; % dim, vecdim, or "all"
     % nanflag  does not make sense for Signal
 end
 
@@ -37,7 +47,7 @@ if (ischar(dim) && isrow(dim) || isstring(dim) && isscalar(dim)) && ...
 elseif isempty(dim) || ...
                     (isrow(dim) && all(dim == floor(dim)) && all(dim > 0))   
     if isempty(dim)
-        dim = 1;
+        [~, dim] = find(size(a)-1, 1, 'first');
     end
 
     if ~isequal(unique(dim), dim)
