@@ -6,10 +6,17 @@ if isequal(size(a), size(b))
         a(i) = fun(a(i), b(i));
     end
 elseif isscalar(a)
-    for i = 1:numel(b)
-        b(i) = fun(a, b(i));
+    if isa(b, "Signal")
+        for i = 1:numel(b)
+            b(i) = fun(a, b(i));
+        end
+        a = b;
+    else
+        a = repmat(a, size(b));
+        for i = 1:numel(a)
+            a(i) = fun(a(i), b(i));
+        end
     end
-    a = b;
 elseif isscalar(b)
     for i = 1:numel(a)
         a(i) = fun(a(i), b);
