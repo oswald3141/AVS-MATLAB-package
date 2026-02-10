@@ -66,6 +66,7 @@ classdef Signal
         a = abs(a);
         a = angle(a);
         r = sum(a, dim);
+        r = rms(a);
         this = upsample(this, n, phase);
         this = downsample(this, n, phase);
 
