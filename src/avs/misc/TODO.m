@@ -14,7 +14,7 @@ function TODO(addmsg, severity)
 
 
 arguments
-    addmsg {mustBeTextScalar}
+    addmsg {mustBeTextScalar} = "";
     severity {mustBeMember(severity, ["error" "warning"])} = "error";
 end
 
