@@ -4,6 +4,8 @@ function s = rmfield_quiet(s, field)
 %   S = RMFIELD(S,FIELD) removes the field specified by FIELD from the 
 %   m x n structure array S. Unlike MATLAB's rmfield, does not throw an
 %   exception if the field does not exist.
+%
+%   See also: GET_FIELD_SAFELY
 
 try
     s = rmfield(s, field);
