@@ -23,8 +23,7 @@ elseif isscalar(b)
     end
 else
     [aIdx, bIdx] = calc_indices_for_bsx(size(a), size(b));
-    r = createArray(size(aIdx), "FillValue", Signal( ...
-        zeros(1, a(1).n, "like", 1+1j*double(isreal(a))), 1));
+    r = Signal.createArray(size(aIdx), "Like", a(1), "Complex", isreal(a));
     for i = 1:numel(r)
         r(i) = fun(a(aIdx(i)), b(bIdx(i)));
     end

@@ -40,8 +40,8 @@ classdef Signal
 
     methods(Static, Access = public)
         r = bsxfun(fun, a, b);
-
         this = from_struct(s)
+        a = createArray(sz, args);
     end
 
     methods(Access = public)
