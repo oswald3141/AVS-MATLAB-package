@@ -27,7 +27,7 @@ arguments
     b {mustHaveCompatibleSizes(a, b)}
 
     preallocVal (1,1) = Signal( ...
-        zeros(1, a(1).n, "like", 1+1j*double(a(1).isComplex)), 1);
+        zeros(1, a(1).n, "like", 1+1j*double(isreal(a))), 1);
 end
 
 [aIdx, bIdx] = calc_indices_for_bsx(size(a), size(b));

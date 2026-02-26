@@ -21,7 +21,7 @@ arguments(Input)
 
 end
 
-if this.isComplex
+if ~isreal(this)
     if type == "re"
         this.samples = ...
             clip_real_array(real(this.samples), maxValue, minValue) + ...

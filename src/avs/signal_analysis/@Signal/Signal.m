@@ -18,7 +18,6 @@ classdef Signal
     properties(Dependent, GetAccess = public)
         n          % Number of samples
         Ts         % Sampling period, s
-        isComplex  % True if the samples are complex-valued
         t          % Time vector from 0 s
         re         % Alias for a vector with real part of each sample
         im         % Alias for a vector with imaginary part of each sample
@@ -67,6 +66,7 @@ classdef Signal
         a = angle(a);
         r = sum(a, dim);
         r = rms(a);
+        r = isreal(a);
         this = upsample(this, n, phase);
         this = downsample(this, n, phase);
 
@@ -84,10 +84,6 @@ classdef Signal
 
         function val = get.Ts(this)
             val = 1./this.Fs;
-        end
-
-        function val = get.isComplex(this)
-            val = ~isreal(this.samples);
         end
 
         function val = get.t(this)
