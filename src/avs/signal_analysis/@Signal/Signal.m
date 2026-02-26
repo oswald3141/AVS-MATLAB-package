@@ -21,6 +21,8 @@ classdef Signal
         t          % Time vector from 0 s
         re         % Alias for a vector with real part of each sample
         im         % Alias for a vector with imaginary part of each sample
+        Abs        % Alias for a vector with absolute value of each sample
+        Angle      % Alias for a vector with angle of each sample
     end
 
     methods(Access = public)
@@ -95,6 +97,14 @@ classdef Signal
 
         function val = get.im(this)
             val = imag(this.samples);
+        end
+
+        function val = get.Abs(this)
+            val = abs(this.samples);
+        end
+
+        function val = get.Angle(this)
+            val = angle(this.samples);
         end
     end
 
