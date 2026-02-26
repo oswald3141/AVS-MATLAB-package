@@ -21,7 +21,6 @@ classdef Signal
         t          % Time vector from 0 s
         re         % Alias for a vector with real part of each sample
         im         % Alias for a vector with imaginary part of each sample
-        normalized % Signal with samples normalized to max. abs. value
     end
 
     methods(Access = public)
@@ -96,10 +95,6 @@ classdef Signal
 
         function val = get.im(this)
             val = imag(this.samples);
-        end
-
-        function this = get.normalized(this)
-            this.samples = this.samples./max(abs(this.samples));
         end
     end
 
