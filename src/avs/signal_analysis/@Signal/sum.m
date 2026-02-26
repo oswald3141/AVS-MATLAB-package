@@ -66,7 +66,7 @@ elseif isempty(dim) || ...
         outIdxCombs = calc_indices_for_along_dim_operation(size(a), dim);
 
         r = Signal.createArray(size(outIdxCombs), ...
-            "Like", a(1), "Complex", isreal(a));
+            "Like", a(1), "Complex", ~isreal(a));
 
         for ir = 1:numel(r)
             for ia = outIdxCombs{ir}
