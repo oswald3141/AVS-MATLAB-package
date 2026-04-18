@@ -5,7 +5,7 @@ function unreachable()
 %   otherwise clause of a swith-case. If the line is reached, the function
 %   throws an exception.
 %
-%   See also: TODO
+%   See also: TODO, DO_NOTHING
 
 throwAsCaller(MException('AVS:unreachable', ...
     'This line is supposed to be unreachable.'));

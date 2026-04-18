@@ -10,7 +10,7 @@ function TODO(addmsg, severity)
 %   TODO(STR, SEVERITY) throws an error if SEVERITY is "error", and
 %   displays a warning if it is "warning".
 %
-%   See also: UNREACHABLE
+%   See also: UNREACHABLE, DO_NOTHING
 
 
 arguments
