@@ -1,7 +1,7 @@
 function mustBeEven(A)
 % MUSTBEEVEN Validate that value is even
 %
-%   MUSTBEODD(A) throws an error if A contains odd numbers.
+%   MUSTBEEVEN(A) throws an error if A contains odd numbers.
 %   A value is even if the remainder after division of it by 2
 %   determined with mod is 0.
 %
